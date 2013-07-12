@@ -29,6 +29,16 @@ class Ball:
             self.x = reverse(self.x)        # ... reverse left/right direction
 
 
+# define the Paddle
+class Paddle:
+    def __init__(self, canvas, color):      # like ball, need to draw on a canvas, and in a given colour
+        self.canvas = canvas
+        self.id = canvas.create_rectangle(0, 0, 100, 10, fill=color)
+        self.canvas.move(self.id, 200, 300)
+        
+    def draw(self):
+        pass
+
 # a helper function to reverse a direction
 def reverse(direction):
     return direction * -1
@@ -49,11 +59,13 @@ canvas.pack()       # tell canvas to size itself
 app.update()        # without this the canvas height and width is not set correctly
 
 ball = Ball(canvas, 'red')      # create a red ball
+paddle = Paddle(canvas, 'blue') # create a blue paddle
 
 
 # use our own game loop
 while True:
     ball.draw()
+    paddle.draw()
     app.update_idletasks()
     app.update()
     time.sleep(0.01)
