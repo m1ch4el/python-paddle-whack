@@ -14,6 +14,7 @@ class Ball:
         self.y = random.randint(-3, 3)      # how many pixels will we move down initially?        
         self.canvas_height = self.canvas.winfo_height()     # get height of canvas        
         self.canvas_width = self.canvas.winfo_width()       # get width of canvas
+        self.hit_bottom = False
 
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)       # move x pixel right, y pixel down
@@ -31,6 +32,9 @@ class Ball:
 
         if self.hit_paddle():
             self.y = reverse(self.y)
+            
+        if pos[3] >= self.canvas_height:
+            self.hit_bottom = True
             
     def hit_paddle(self):
         paddle_pos = self.canvas.coords(self.paddle.id)
@@ -90,8 +94,9 @@ ball = Ball(canvas, paddle, 'red')      # create a red ball
 
 # use our own game loop
 while True:
-    ball.draw()
-    paddle.draw()
+    if ball.hit_bottom == False:
+        ball.draw()
+        paddle.draw()
     app.update_idletasks()
     app.update()
     time.sleep(0.01)
