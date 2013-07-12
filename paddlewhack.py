@@ -14,4 +14,8 @@ canvas = Canvas(app, width=500, height=400,
 canvas.pack()       # tell canvas to size itself
 app.update()        # without this the canvas height and width is not set correctly
 
-app.mainloop()      # hang around until the window is closed...
+# use our own game loop
+while True:
+    app.update_idletasks()
+    app.update()
+    time.sleep(0.01)
