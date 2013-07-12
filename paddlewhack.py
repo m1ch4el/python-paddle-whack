@@ -1,5 +1,6 @@
 from tkinter import *
 import time
+import random
 
 
 # define the Ball
@@ -8,8 +9,8 @@ class Ball:
         self.canvas = canvas
         self.id = canvas.create_oval(10, 10, 25, 25, fill=color) # coordinates: top-l, bot-r
         self.canvas.move(self.id, 245, 100);   # move 245 px right, 100 down
-        self.x = 3      # how many pixels will we move right initially?
-        self.y = -3     # how many pixels will we move down initially?        
+        self.x = random.randint(-3, 3)      # how many pixels will we move right initially?
+        self.y = random.randint(-3, 3)      # how many pixels will we move down initially?        
         self.canvas_height = self.canvas.winfo_height()     # get height of canvas        
         self.canvas_width = self.canvas.winfo_width()       # get width of canvas
 
