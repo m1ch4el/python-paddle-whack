@@ -9,16 +9,21 @@ class Ball:
         self.id = canvas.create_oval(10, 10, 25, 25, fill=color) # coordinates: top-l, bot-r
         self.canvas.move(self.id, 245, 100);   # move 245 px right, 100 down
         self.x = 0      # how many pixels will we move right?
-        self.y = -1     # how many pixels will we move down initially?        
+        self.y = -3     # how many pixels will we move down initially?        
         self.canvas_height = self.canvas.winfo_height()     # get height of canvas        
 
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)       # move x pixel right, y pixel down
         pos = self.canvas.coords(self.id)               # get current x and y coordinates of ourself (the ball)
-        if pos[1] <= 0:             # if top of the ball hits top of screen
-            self.y = 1              # ... start moving down
+        if pos[1] <= 0:                     # if top of the ball hits top of screen
+            self.y = reverse(self.y)        # ... reverse up/down direction
         if pos[3] >= self.canvas_height:    # if bottom of ball hits bottom of screen
-            self.y = -1                     # ... start moving up
+            self.y = reverse(self.y)        # ... reverse up/down direction
+
+
+# a helper function to reverse a direction
+def reverse(direction):
+    return direction * -1
 
 
 # this is where the game script begins
