@@ -10,7 +10,7 @@ class Ball:
         self.canvas.move(self.id, 245, 100);   # move 245 px right, 100 down
         
     def draw(self):
-        pass    # we will add code here shortly
+        self.canvas.move(self.id, 0, -1)       # move 0 px right, 1 up
         
 
 
@@ -33,6 +33,7 @@ ball = Ball(canvas, 'red')      # create a red ball
 
 # use our own game loop
 while True:
+    ball.draw()
     app.update_idletasks()
     app.update()
     time.sleep(0.01)
