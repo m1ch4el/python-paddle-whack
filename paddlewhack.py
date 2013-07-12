@@ -8,17 +8,24 @@ class Ball:
         self.canvas = canvas
         self.id = canvas.create_oval(10, 10, 25, 25, fill=color) # coordinates: top-l, bot-r
         self.canvas.move(self.id, 245, 100);   # move 245 px right, 100 down
-        self.x = 0      # how many pixels will we move right?
+        self.x = 3      # how many pixels will we move right initially?
         self.y = -3     # how many pixels will we move down initially?        
         self.canvas_height = self.canvas.winfo_height()     # get height of canvas        
+        self.canvas_width = self.canvas.winfo_width()       # get width of canvas
 
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)       # move x pixel right, y pixel down
         pos = self.canvas.coords(self.id)               # get current x and y coordinates of ourself (the ball)
+
         if pos[1] <= 0:                     # if top of the ball hits top of screen
             self.y = reverse(self.y)        # ... reverse up/down direction
         if pos[3] >= self.canvas_height:    # if bottom of ball hits bottom of screen
             self.y = reverse(self.y)        # ... reverse up/down direction
+
+        if pos[0] <= 0:                     # if left side of the ball hits left screen border
+            self.x = reverse(self.x)        # ... reverse left/right direction
+        if pos[2] >= self.canvas_width:     # if right side of ball hits right screen border
+            self.x = reverse(self.x)        # ... reverse left/right direction
 
 
 # a helper function to reverse a direction
