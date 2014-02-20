@@ -74,6 +74,33 @@ def reverse(direction):
     return direction * -1
 
 
+class Game:
+    '''
+    The game class controls overall game flow  
+    '''
+    def __init__(self, canvas):
+        '''
+        initialise game: 
+        Create objects that should live on the game canvas
+        Add a flag to control start/end of game
+
+        '''
+        self.canvas = canvas
+        self.paddle = Paddle(canvas, 'blue')     # create a blue paddle
+        self.ball = Ball(canvas, self.paddle, 'red')  # create a red ball
+        self.running = True
+
+    def draw(self):
+        '''
+        draw everything, then check whether game has ended
+        '''
+        self.ball.draw()
+        self.paddle.draw()
+
+        if self.ball.hit_bottom:
+            self.running = False
+
+
 # this is where the game script begins
 app = Tk()
 
@@ -88,15 +115,14 @@ canvas = Canvas(app, width=500, height=400,
 canvas.pack()       # tell canvas to size itself
 app.update()        # without this the canvas height and width is not set correctly
 
-paddle = Paddle(canvas, 'blue') # create a blue paddle
-ball = Ball(canvas, paddle, 'red')      # create a red ball
-
+game = Game(canvas)
 
 # use our own game loop
 while True:
-    if ball.hit_bottom == False:
-        ball.draw()
-        paddle.draw()
+
+    if game.running:
+        game.draw()
+
     app.update_idletasks()
     app.update()
     time.sleep(0.01)
