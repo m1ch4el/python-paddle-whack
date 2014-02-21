@@ -97,11 +97,12 @@ class Game:
                     "---------------------\n" + \
                     "s - start game\n" + \
                     "q - quit"
-        self.canvas.create_text(250, 200, text=self.menu)
+        self.menu_text = self.canvas.create_text(250, 200, text=self.menu)
 
 
     def start(self, evt):
         self.running = True
+        self.canvas.delete(self.menu_text)
 
     def quit(self, evt):
         # only quit if the game is not running
@@ -119,6 +120,7 @@ class Game:
 
         if self.ball.hit_bottom:
             self.running = False
+            self.menu_text = self.canvas.create_text(250, 200, text=self.menu)
 
 
 # this is where the game script begins
