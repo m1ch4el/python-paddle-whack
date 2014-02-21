@@ -121,7 +121,6 @@ class Game:
         if self.running:
             self.canvas.delete(self.menu_text)
         else:
-            pause_text = 'PAUSED\np - continue'
             pause_text = "P A U S E D\n" + \
                     "---------------------\n" + \
                     "p - resume\n" + \
