@@ -87,8 +87,6 @@ class Game:
         '''
         self.canvas = canvas
         self.app = app
-        self.paddle = Paddle(canvas, 'blue')     # create a blue paddle
-        self.ball = Ball(canvas, self.paddle, 'red')  # create a red ball
         self.running = False
 
         self.canvas.bind_all('<KeyPress-s>', self.start)
@@ -101,8 +99,13 @@ class Game:
 
 
     def start(self, evt):
-        self.running = True
-        self.canvas.delete(self.menu_text)
+        if self.running:
+            pass
+        else:    
+            self.paddle = Paddle(canvas, 'blue')     # create a blue paddle
+            self.ball = Ball(canvas, self.paddle, 'red')  # create a red ball
+            self.running = True
+            self.canvas.delete(self.menu_text)
 
     def quit(self, evt):
         # only quit if the game is not running
