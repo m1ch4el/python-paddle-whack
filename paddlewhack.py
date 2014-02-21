@@ -78,7 +78,7 @@ class Game:
     '''
     The game class controls overall game flow  
     '''
-    def __init__(self, canvas):
+    def __init__(self, canvas, app):
         '''
         initialise game: 
         Create objects that should live on the game canvas
@@ -86,20 +86,29 @@ class Game:
 
         '''
         self.canvas = canvas
+        self.app = app
         self.paddle = Paddle(canvas, 'blue')     # create a blue paddle
         self.ball = Ball(canvas, self.paddle, 'red')  # create a red ball
         self.running = False
 
         self.canvas.bind_all('<KeyPress-s>', self.start)
+        self.canvas.bind_all('<KeyPress-q>', self.quit)
         self.menu = "P A D D L E   W H A C K\n" + \
                     "---------------------\n" + \
-                    "s - start game"
+                    "s - start game\n" + \
+                    "q - quit"
         self.canvas.create_text(250, 200, text=self.menu)
 
 
     def start(self, evt):
         self.running = True
 
+    def quit(self, evt):
+        # only quit if the game is not running
+        if self.running:
+            pass
+        else:
+            self.app.destroy()
 
     def draw(self):
         '''
@@ -126,7 +135,7 @@ canvas = Canvas(app, width=500, height=400,
 canvas.pack()       # tell canvas to size itself
 app.update()        # without this the canvas height and width is not set correctly
 
-game = Game(canvas)
+game = Game(canvas, app)
 
 # use our own game loop
 while True:
