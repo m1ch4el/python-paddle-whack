@@ -91,9 +91,11 @@ class Game:
 
         self.canvas.bind_all('<KeyPress-s>', self.start)
         self.canvas.bind_all('<KeyPress-q>', self.quit)
+        self.canvas.bind_all('<KeyPress-p>', self.pause)        
         self.menu = "P A D D L E   W H A C K\n" + \
                     "---------------------\n" + \
                     "s - start game\n" + \
+                    "p - pause/resume\n" + \
                     "q - quit"
         self.menu_text = self.canvas.create_text(250, 200, text=self.menu)
 
@@ -113,6 +115,19 @@ class Game:
             pass
         else:
             self.app.destroy()
+
+    def pause(self, evt):
+        self.running = not self.running 
+        if self.running:
+            self.canvas.delete(self.menu_text)
+        else:
+            pause_text = 'PAUSED\np - continue'
+            pause_text = "P A U S E D\n" + \
+                    "---------------------\n" + \
+                    "p - resume\n" + \
+                    "q - quit"
+
+            self.menu_text = self.canvas.create_text(250, 200, text=pause_text)
 
     def draw(self):
         '''
