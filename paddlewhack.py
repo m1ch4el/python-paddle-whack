@@ -88,7 +88,18 @@ class Game:
         self.canvas = canvas
         self.paddle = Paddle(canvas, 'blue')     # create a blue paddle
         self.ball = Ball(canvas, self.paddle, 'red')  # create a red ball
+        self.running = False
+
+        self.canvas.bind_all('<KeyPress-s>', self.start)
+        self.menu = "P A D D L E   W H A C K\n" + \
+                    "---------------------\n" + \
+                    "s - start game"
+        self.canvas.create_text(250, 200, text=self.menu)
+
+
+    def start(self, evt):
         self.running = True
+
 
     def draw(self):
         '''
