@@ -19,8 +19,7 @@ class Ball:
     def draw(self):
         self.canvas.move(self.id, self.x, self.y)       # move x pixel right, y pixel down
         pos = self.canvas.coords(self.id)               # get current x and y coordinates of ourself (the ball)
-
-        if pos[1] <= 0:                     # if top of the ball hits top of screen
+         if pos[1] <= 0:                     # if top of the ball hits top of screen
             self.y = reverse(self.y)        # ... reverse up/down direction
         if pos[3] >= self.canvas_height:    # if bottom of ball hits bottom of screen
             self.y = reverse(self.y)        # ... reverse up/down direction
@@ -53,8 +52,8 @@ class Paddle:
         self.canvas.move(self.id, 200, 300)
         self.x = 0
         self.canvas_width = self.canvas.winfo_width()
-        self.canvas.bind_all('<KeyPress-Left>', self.turn_left)
-        self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
+        self.canvas.bind_all('<KeyPress-a>', self.turn_left)
+        self.canvas.bind_all('<KeyPress-d>', self.turn_right)
         
     def draw(self):
         self.canvas.move(self.id, self.x, 0)
